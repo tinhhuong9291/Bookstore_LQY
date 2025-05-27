@@ -1,17 +1,17 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import NavigationBar from "./components/NavigationBar";
-import Home from "./pages/Home";
 
-export default function App() {
+import BookDetail from "./pages/BookDetail";
+import HomePage from "./pages/HomePage";
+
+function App() {
   return (
     <Router>
-      <NavigationBar />
-      <div className="p-4">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          {/* Add routes later: BookDetail, Cart, Admin */}
-        </Routes>
-      </div>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/books/:id" element={<BookDetail />} />
+      </Routes>
     </Router>
   );
 }
+
+export default App;
