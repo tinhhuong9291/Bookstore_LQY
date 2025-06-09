@@ -28,6 +28,7 @@ const LoginPage: React.FC = () => {
     try {
       const response = await API.post('/auth/login', formData);
       localStorage.setItem('token', response.data.token);
+      window.dispatchEvent(new Event('storage'));
       navigate('/');
     } catch (err: any) {
       setError(err.response?.data?.message || 'An error occurred during login');

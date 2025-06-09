@@ -35,7 +35,7 @@ router.post("/login", (req, res) => {
       res.status(401).json({ message: "Sai tài khoản hoặc mật khẩu" });
     } else {
       const token = jwt.sign(
-        { id: user._id, isAdmin: user.isAdmin },
+        { id: user._id, email: user.email, isAdmin: user.isAdmin },
         process.env.JWT_SECRET!
       );
       res.json({ token });

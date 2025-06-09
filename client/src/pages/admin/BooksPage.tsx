@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import API from '../../api/axios';
-import AdminLayout from '../../components/AdminLayout';
+import React, { useState, useEffect } from "react";
+import API from "../../api/axios";
+import AdminLayout from "../../components/AdminLayout";
 
 interface Book {
   _id: string;
@@ -18,11 +18,11 @@ const BooksPage: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingBook, setEditingBook] = useState<Book | null>(null);
   const [formData, setFormData] = useState({
-    title: '',
-    author: '',
-    description: '',
-    price: '',
-    imageUrl: '',
+    title: "",
+    author: "",
+    description: "",
+    price: "",
+    imageUrl: "",
   });
 
   useEffect(() => {
@@ -32,12 +32,12 @@ const BooksPage: React.FC = () => {
   const fetchBooks = async () => {
     try {
       setLoading(true);
-      const response = await API.get('/books');
+      const response = await API.get("/books");
       setBooks(response.data);
       setError(null);
     } catch (err) {
-      setError('Failed to fetch books');
-      console.error('Error fetching books:', err);
+      setError("Failed to fetch books");
+      console.error("Error fetching books:", err);
     } finally {
       setLoading(false);
     }
@@ -56,11 +56,11 @@ const BooksPage: React.FC = () => {
     } else {
       setEditingBook(null);
       setFormData({
-        title: '',
-        author: '',
-        description: '',
-        price: '',
-        imageUrl: '',
+        title: "",
+        author: "",
+        description: "",
+        price: "",
+        imageUrl: "",
       });
     }
     setIsModalOpen(true);
@@ -70,11 +70,11 @@ const BooksPage: React.FC = () => {
     setIsModalOpen(false);
     setEditingBook(null);
     setFormData({
-      title: '',
-      author: '',
-      description: '',
-      price: '',
-      imageUrl: '',
+      title: "",
+      author: "",
+      description: "",
+      price: "",
+      imageUrl: "",
     });
   };
 
@@ -89,25 +89,25 @@ const BooksPage: React.FC = () => {
       if (editingBook) {
         await API.put(`/books/${editingBook._id}`, bookData);
       } else {
-        await API.post('/books', bookData);
+        await API.post("/books", bookData);
       }
 
       handleCloseModal();
       fetchBooks();
     } catch (err) {
-      setError('Failed to save book');
-      console.error('Error saving book:', err);
+      setError("Failed to save book");
+      console.error("Error saving book:", err);
     }
   };
 
   const handleDelete = async (id: string) => {
-    if (window.confirm('Are you sure you want to delete this book?')) {
+    if (window.confirm("Are you sure you want to delete this book?")) {
       try {
         await API.delete(`/books/${id}`);
         fetchBooks();
       } catch (err) {
-        setError('Failed to delete book');
-        console.error('Error deleting book:', err);
+        setError("Failed to delete book");
+        console.error("Error deleting book:", err);
       }
     }
   };
@@ -126,7 +126,9 @@ const BooksPage: React.FC = () => {
     <AdminLayout>
       <div className="max-w-7xl mx-auto">
         <div className="flex justify-between items-center mb-6">
-          <h1 className="text-2xl font-semibold text-gray-900">Books Management</h1>
+          <h1 className="text-2xl font-semibold text-gray-900">
+            Books Management
+          </h1>
           <button
             onClick={() => handleOpenModal()}
             className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
@@ -172,7 +174,9 @@ const BooksPage: React.FC = () => {
                         />
                       </div>
                       <div className="ml-4">
-                        <div className="text-sm font-medium text-gray-900">{book.title}</div>
+                        <div className="text-sm font-medium text-gray-900">
+                          {book.title}
+                        </div>
                       </div>
                     </div>
                   </td>
@@ -181,9 +185,9 @@ const BooksPage: React.FC = () => {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="text-sm text-gray-900">
-                      {new Intl.NumberFormat('vi-VN', {
-                        style: 'currency',
-                        currency: 'VND'
+                      {new Intl.NumberFormat("vi-VN", {
+                        style: "currency",
+                        currency: "VND",
                       }).format(book.price)}
                     </div>
                   </td>
@@ -213,58 +217,84 @@ const BooksPage: React.FC = () => {
         <div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center">
           <div className="bg-white rounded-lg p-6 max-w-md w-full">
             <h2 className="text-xl font-semibold mb-4">
-              {editingBook ? 'Edit Book' : 'Add New Book'}
+              {editingBook ? "Edit Book" : "Add New Book"}
             </h2>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700">Title</label>
+                <label className="block text-sm font-medium text-gray-700">
+                  Title
+                </label>
                 <input
                   type="text"
                   value={formData.title}
-                  onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, title: e.target.value })
+                  }
                   className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                  placeholder="Enter the book title"
+                  title="Book Title"
                   required
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700">Author</label>
+                <label className="block text-sm font-medium text-gray-700">
+                  Author
+                </label>
                 <input
                   type="text"
                   value={formData.author}
-                  onChange={(e) => setFormData({ ...formData, author: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, author: e.target.value })
+                  }
                   className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                   required
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700">Description</label>
+                <label className="block text-sm font-medium text-gray-700">
+                  Description
+                </label>
                 <textarea
                   value={formData.description}
-                  onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, description: e.target.value })
+                  }
                   className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                   rows={3}
+                  placeholder="Enter a brief description of the book"
                   required
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700">Price</label>
+                <label className="block text-sm font-medium text-gray-700">
+                  Price
+                </label>
                 <input
                   type="number"
                   value={formData.price}
-                  onChange={(e) => setFormData({ ...formData, price: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, price: e.target.value })
+                  }
                   className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                  placeholder="Enter the price"
                   required
                   min="0"
                   step="0.01"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700">Image URL</label>
+                <label className="block text-sm font-medium text-gray-700">
+                  Image URL
+                </label>
                 <input
                   type="url"
                   value={formData.imageUrl}
-                  onChange={(e) => setFormData({ ...formData, imageUrl: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, imageUrl: e.target.value })
+                  }
                   className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                  placeholder="Enter the image URL"
+                  title="Image URL"
                   required
                 />
               </div>
@@ -280,7 +310,7 @@ const BooksPage: React.FC = () => {
                   type="submit"
                   className="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                 >
-                  {editingBook ? 'Save Changes' : 'Add Book'}
+                  {editingBook ? "Save Changes" : "Add Book"}
                 </button>
               </div>
             </form>
@@ -291,4 +321,4 @@ const BooksPage: React.FC = () => {
   );
 };
 
-export default BooksPage; 
+export default BooksPage;

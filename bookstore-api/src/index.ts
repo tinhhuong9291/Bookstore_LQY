@@ -12,7 +12,14 @@ dotenv.config();
 const app = express();
 app.use(
   cors({
-    origin: "http://localhost:3000", // địa chỉ frontend
+    // địa chỉ frontend
+    origin: [
+      "http://localhost:3000",
+      "https://bookstore-lqy-f5tc-5rkdcruoy-thanhtiens-projects-32a8cd95.vercel.app",
+      "https://bookstore-lqy-f5tc.vercel.app",
+    ],
+    // cho phép các phương thức HTTP
+    methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
 );
