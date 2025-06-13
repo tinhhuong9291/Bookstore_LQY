@@ -31,9 +31,15 @@ app.use("/api/orders", orderRoutes);
 app.use("/api/auth", authRoutes);
 
 const PORT = process.env.PORT || 8080;
-mongoose
-  .connect(process.env.MONGO_URI!)
-  .then(() => {
-    app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));
-  })
-  .catch((err) => console.error("❌ MongoDB connect failed:", err));
+
+app.listen(PORT, () => {
+  console.log(`✅ Server running on port ${PORT}`);
+  mongoose
+    .connect(process.env.MONGO_URI!)
+    .then(() => {
+      console.log("✅ MongoDB connected");
+    })
+    .catch((err) => {
+      console.error("❌ MongoDB connect failed:", err);
+    });
+});

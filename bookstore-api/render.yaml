@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: bookstore-api
+    env: node
+    plan: free
+    buildCommand: yarn install && yarn build
+    startCommand: node dist/index.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000 # Render sẽ tự động override biến này, nhưng nên có giá trị mặc định
+      - key: MONGO_URI
+        sync: false # Bạn sẽ nhập giá trị này trên dashboard của Render
+    autoDeploy: true 
