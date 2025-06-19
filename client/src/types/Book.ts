@@ -5,4 +5,9 @@ export interface Book {
   image: string;
   author?: string;
   description?: string;
+  category?: string;
+  quantity?: number;
+  isAvailable?: boolean;
+  createdAt?: Date;
+  updatedAt?: Date;
 }

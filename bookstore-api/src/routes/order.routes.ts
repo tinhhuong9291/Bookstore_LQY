@@ -16,6 +16,22 @@ router.post("/", async (req, res) => {
   res.status(201).json(order);
 });
 
+// POST create add to cart with userId
+router.post("/", async (req, res) => {
+  const { userId, items } = req.body;
+
+  let cart = await Order.findOne({ userId });
+
+  if (!cart) {
+    cart = new Order({ userId, items });
+  } else {
+    cart.items = items;
+  }
+
+  await cart.save();
+  res.json(cart);
+});
+
 // PUT update status
 router.put("/:id", async (req, res) => {
   const updated = await Order.findByIdAndUpdate(req.params.id, req.body, {

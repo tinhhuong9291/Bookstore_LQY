@@ -247,6 +247,8 @@ const BooksPage: React.FC = () => {
                     setFormData({ ...formData, author: e.target.value })
                   }
                   className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                  placeholder="Enter the author's name"
+                  title="Author Name"
                   required
                 />
               </div>
@@ -282,6 +284,23 @@ const BooksPage: React.FC = () => {
                   step="0.01"
                 />
               </div>
+              {/* <div>
+                <label className="block text-sm font-medium text-gray-700">
+                  quantity
+                </label>
+                <input
+                  type="number"
+                  value={formData.quantity}
+                  onChange={(e) =>
+                    setFormData({ ...formData, quantity: e.target.value })
+                  }
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                  placeholder="Enter the quantity"
+                  required
+                  min="0"
+                  step="0.01"
+                />
+              </div> */}
               <div>
                 <label className="block text-sm font-medium text-gray-700">
                   Image URL
@@ -295,7 +314,6 @@ const BooksPage: React.FC = () => {
                   className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                   placeholder="Enter the image URL"
                   title="Image URL"
-                  required
                 />
               </div>
               <div className="flex justify-end space-x-3 mt-6">

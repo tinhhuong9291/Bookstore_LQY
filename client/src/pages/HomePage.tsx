@@ -34,15 +34,16 @@ const HomePage: React.FC = () => {
   }, []);
 
   const formatPrice = (price: number) => {
-    return new Intl.NumberFormat('vi-VN', {
-      style: 'currency',
-      currency: 'VND'
+    return new Intl.NumberFormat("vi-VN", {
+      style: "currency",
+      currency: "VND",
     }).format(price);
   };
 
-  const filteredBooks = books.filter(book =>
-    book.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    book.author.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredBooks = books.filter(
+    (book) =>
+      book.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      book.author.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   if (loading) {
@@ -94,7 +95,9 @@ const HomePage: React.FC = () => {
 
         {filteredBooks.length === 0 ? (
           <div className="text-center py-12">
-            <p className="text-gray-500 text-lg">No books found matching your search.</p>
+            <p className="text-gray-500 text-lg">
+              No books found matching your search.
+            </p>
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
@@ -120,7 +123,9 @@ const HomePage: React.FC = () => {
                   </p>
                   <button
                     className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors duration-300"
-                    onClick={() => {/* TODO: Implement view details */}}
+                    onClick={() => {
+                      // Navigate to book detail page when the button is clicked
+                    }}
                   >
                     View Details
                   </button>
