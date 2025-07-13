@@ -158,16 +158,4 @@ bookstore-apps/
 - PUT /api/users/:id - Cập nhật thông tin người dùng
 - DELETE /api/users/:id - Xóa người dùng
 
-## Đóng góp
 
-Nếu bạn muốn đóng góp cho dự án, hãy:
-
-1. Fork dự án
-2. Tạo branch mới (`git checkout -b feature/AmazingFeature`)
-3. Commit changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to branch (`git push origin feature/AmazingFeature`)
-5. Mở Pull Request
-
-## License
-
-MIT License. Xem file [LICENSE](LICENSE) để biết thêm chi tiết.
