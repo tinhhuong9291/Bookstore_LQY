@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import API from "../api/axios";
+import { useNavigate } from "react-router-dom";
 
 interface Book {
   _id: string;
@@ -7,6 +8,7 @@ interface Book {
   author: string;
   price: number;
   image: string;
+  quantity?: number;
 }
 
 const HomePage: React.FC = () => {
@@ -14,6 +16,7 @@ const HomePage: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchBooks = async () => {
@@ -42,8 +45,9 @@ const HomePage: React.FC = () => {
 
   const filteredBooks = books.filter(
     (book) =>
-      book.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      book.author.toLowerCase().includes(searchTerm.toLowerCase())
+      (book.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        book.author.toLowerCase().includes(searchTerm.toLowerCase())) &&
+      (typeof book.quantity !== 'number' || book.quantity > 0)
   );
 
   if (loading) {
@@ -123,9 +127,7 @@ const HomePage: React.FC = () => {
                   </p>
                   <button
                     className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors duration-300"
-                    onClick={() => {
-                      // Navigate to book detail page when the button is clicked
-                    }}
+                    onClick={() => navigate(`/books/${book._id}`)}
                   >
                     View Details
                   </button>

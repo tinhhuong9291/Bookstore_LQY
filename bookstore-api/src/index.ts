@@ -6,6 +6,8 @@ import dotenv from "dotenv";
 import bookRoutes from "./routes/book.routes";
 import orderRoutes from "./routes/order.routes";
 import authRoutes from "./routes/auth.routes";
+import cartRoutes from "./routes/cart.routes";
+import userRoutes from "./routes/user.routes";
 
 dotenv.config();
 
@@ -29,6 +31,8 @@ app.use(express.json());
 app.use("/api/books", bookRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/auth", authRoutes);
+app.use("/api/cart", cartRoutes);
+app.use("/api/users", userRoutes);
 
 const PORT = process.env.PORT || 8080;
 

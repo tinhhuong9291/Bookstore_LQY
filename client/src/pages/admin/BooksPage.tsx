@@ -9,6 +9,7 @@ interface Book {
   description: string;
   price: number;
   imageUrl: string;
+  quantity: number; // Thêm trường quantity
 }
 
 const BooksPage: React.FC = () => {
@@ -23,6 +24,7 @@ const BooksPage: React.FC = () => {
     description: "",
     price: "",
     imageUrl: "",
+    quantity: "0", // Thêm trường quantity, mặc định 0
   });
 
   useEffect(() => {
@@ -52,6 +54,7 @@ const BooksPage: React.FC = () => {
         description: book.description,
         price: book.price.toString(),
         imageUrl: book.imageUrl,
+        quantity: book.quantity?.toString() || "0", // Lấy quantity nếu có
       });
     } else {
       setEditingBook(null);
@@ -61,6 +64,7 @@ const BooksPage: React.FC = () => {
         description: "",
         price: "",
         imageUrl: "",
+        quantity: "0",
       });
     }
     setIsModalOpen(true);
@@ -75,6 +79,7 @@ const BooksPage: React.FC = () => {
       description: "",
       price: "",
       imageUrl: "",
+      quantity: "0",
     });
   };
 
@@ -84,6 +89,7 @@ const BooksPage: React.FC = () => {
       const bookData = {
         ...formData,
         price: parseFloat(formData.price),
+        quantity: parseInt(formData.quantity, 10), // Đảm bảo quantity là số nguyên
       };
 
       if (editingBook) {
@@ -284,9 +290,9 @@ const BooksPage: React.FC = () => {
                   step="0.01"
                 />
               </div>
-              {/* <div>
+              <div>
                 <label className="block text-sm font-medium text-gray-700">
-                  quantity
+                  Quantity
                 </label>
                 <input
                   type="number"
@@ -298,9 +304,9 @@ const BooksPage: React.FC = () => {
                   placeholder="Enter the quantity"
                   required
                   min="0"
-                  step="0.01"
+                  step="1"
                 />
-              </div> */}
+              </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700">
                   Image URL
